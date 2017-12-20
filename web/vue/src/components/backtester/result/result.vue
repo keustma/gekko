@@ -5,18 +5,18 @@
       h3 Backtest result
     result-summary(:report='result.report')
     .hr.contain
-    chart(:data='result', height='500')
+    chart(:data='result', height='700', :config='config')
     .hr.contain
     roundtripTable(:roundtrips='result.roundtrips')
 </template>
 
 <script>
-import resultSummary from './summary.vue'
-import chart from './chartWrapper.vue'
-import roundtripTable from './roundtripTable.vue'
+  import resultSummary from './summary.vue'
+  import chart from './chartWrapper.vue'
+  import roundtripTable from './roundtripTable.vue'
 
-export default {
-  props: ['result'],
+  export default {
+    props: ['result', 'config'],
   data: () => {
     return {}
   },

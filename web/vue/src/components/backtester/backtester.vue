@@ -9,16 +9,17 @@
         div(v-if='backtestState === "fetching"').scan-btn
           p Running backtest..
           spinner
-    result(v-if='backtestResult && backtestState === "fetched"', :result='backtestResult')
+    div.result-wrapper
+      result(v-if='backtestResult && backtestState === "fetched"', :result='backtestResult', :config='config')
 </template>
 
 <script>
-import configBuilder from './backtestConfigBuilder.vue'
-import result from './result/result.vue'
-import { post } from '../../tools/ajax'
-import spinner from '../global/blockSpinner.vue'
+  import configBuilder from './backtestConfigBuilder.vue'
+  import result from './result/result.vue'
+  import {post} from '../../tools/ajax'
+  import spinner from '../global/blockSpinner.vue'
 
-export default {
+  export default {
   data: () => {
     return {
       backtestable: false,
@@ -43,7 +44,7 @@ export default {
       const req = {
         gekkoConfig: this.config,
         data: {
-          candleProps: ['close', 'start'],
+          candleProps: ['close', 'start', 'open', 'high', 'low', 'volume'],
           indicatorResults: true,
           report: true,
           roundtrips: true,
@@ -70,5 +71,9 @@ export default {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.result-wrapper {
+  min-height: 1000px;
 }
 </style>
